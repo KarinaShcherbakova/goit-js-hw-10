@@ -1,0 +1,104 @@
+.container-timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;     
+    height: 100vh;  
+}
+.container-input-btn {
+    margin-bottom: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+.input-calendar {
+    width: 300px;
+    border-radius: 4px;
+    border: 1px solid #808080;
+    outline: transparent;
+    padding: 8px 16px;
+    color: #2E2F42;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    background-color: #FFFFFF;
+    margin-right: 8px;
+}
+.input-calendar:hover {
+    border: 1px solid #000000;
+}
+.input-calendar:active {
+    border: 1px solid #4E75FF;
+    color: #000000;
+}
+.input-calendar:disabled {
+    border: 1px solid #808080;
+    color: #808080;
+    background-color: #FAFAFA;
+}
+.input-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    opacity: 0px;
+    background-color: #4E75FF;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    text-align: center;
+    color: #FFFFFF;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer; 
+    width: 80px;  
+    border: none;
+}
+.input-btn:hover {
+    background-color: #6C8CFF;
+}
+.input-btn:disabled {
+    background-color: #CFCFCF;
+    color: #989898;
+}
+.timer {
+    display: flex;
+    gap: 24px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+.field {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 10px;
+    width: 82px;
+}
+.value {
+    display: flex;
+    justify-content: center;
+    width: 55px;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 48px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    color: #2E2F42;
+}
+.label {
+    width: 82px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    color: #2E2F42;
+    text-transform: uppercase;
+}

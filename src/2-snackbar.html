@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/2-cnackbar.css" />
+  </head>
+</html>
+<body class="container-main">
+    <p><a class="main-button" href="./index.html">Go back</a></p>
+    <div class="container-promise" >
+        <form class="form">
+          <label class="label-delay" >
+            Delay (ms)
+            <input type="number" name="delay" required />
+          </label>
+          <fieldset class="fieldset-main">
+            <legend class="legend-main">State</legend>
+            <label class="label-promise">
+              <input type="radio" name="state" value="fulfilled" required />
+              Fulfilled
+            </label>
+            <label  class="label-promise">
+              <input type="radio" name="state" value="rejected" required />
+              Rejected
+            </label>
+          </fieldset>
+          <button  class="promise-btn" type="submit">Create notification</button>
+        </form>
+        </div>
+    <script src="./js/2-snackbar.js" type="module"></script>
+  </body>
+</html>
