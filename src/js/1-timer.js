@@ -3,39 +3,17 @@ import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-const startButton = document.querySelector('[data-start]');
+const startBtn = document.querySelector('[data-start]');
 const dateTimePicker = document.querySelector('#datetime-picker');
-const daysEl = document.querySelector('[data-days]');
-const hoursEl = document.querySelector('[data-hours]');
-const minutesEl = document.querySelector('[data-minutes]');
-const secondsEl = document.querySelector('[data-seconds]');
+const daysField = document.querySelector('[data-days]');
+const hoursField = document.querySelector('[data-hours]');
+const minutesField = document.querySelector('[data-minutes]');
+const secondsField = document.querySelector('[data-seconds]');
 
-let timerInterval;
+let timerId = null;
 let userSelectedDate = null;
 
-
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    const selectedDate = selectedDates[0];
-
-    if (selectedDate <= new Date()) {
-      iziToast.warning({
-        title: 'Warning',
-        message: 'Please choose a date in the future',
-      });
-      startButton.disabled = true;
-    } else {
-      userSelectedDate = selectedDate;
-      startButton.disabled = false;
-    }
-  },
-};
-
-flatpickr(dateTimePicker, options);
+startBtn.disabled = true;  
 
 
 function convertMs(ms) {
@@ -58,33 +36,51 @@ function addLeadingZero(value) {
 }
 
 
-function updateTimerDisplay({ days, hours, minutes, seconds }) {
-  daysEl.textContent = addLeadingZero(days);
-  hoursEl.textContent = addLeadingZero(hours);
-  minutesEl.textContent = addLeadingZero(minutes);
-  secondsEl.textContent = addLeadingZero(seconds);
-}
+flatpickr(dateTimePicker, {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    userSelectedDate = selectedDates[0];
+
+    if (userSelectedDate <= new Date()) {
+      iziToast.error({
+        title: 'Error',
+        message: 'Please choose a date in the future',
+        position: 'topRight',
+      });
+      startBtn.disabled = true;
+    } else {
+      startBtn.disabled = false;
+    }
+  },
+});
 
 
-startButton.addEventListener('click', () => {
-  startButton.disabled = true;
+startBtn.addEventListener('click', () => {
+  startBtn.disabled = true;
   dateTimePicker.disabled = true;
 
-  timerInterval = setInterval(() => {
+  timerId = setInterval(() => {
     const currentTime = new Date();
-    const remainingTime = userSelectedDate - currentTime;
+    const timeDifference = userSelectedDate - currentTime;
 
-    if (remainingTime <= 0) {
-      clearInterval(timerInterval);
+    if (timeDifference <= 0) {
+      clearInterval(timerId);
+      dateTimePicker.disabled = false;
       iziToast.success({
         title: 'Success',
-        message: 'Countdown has ended!',
+        message: 'Countdown completed!',
+        position: 'topRight',
       });
-      dateTimePicker.disabled = false;
       return;
     }
 
-    const timeComponents = convertMs(remainingTime);
-    updateTimerDisplay(timeComponents);
+    const { days, hours, minutes, seconds } = convertMs(timeDifference);
+    daysField.textContent = addLeadingZero(days);
+    hoursField.textContent = addLeadingZero(hours);
+    minutesField.textContent = addLeadingZero(minutes);
+    secondsField.textContent = addLeadingZero(seconds);
   }, 1000);
 });
